@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -36,6 +38,13 @@ namespace ResumeManager.Models
         public int TotalExperience { get; set; }
 
         public virtual List<Experience> Experiences { get; set; } = new List<Experience>();
+
+        public string PhotoUrl { get; set; }
+        [DisplayName("Profile Photo")]
+        [Required(ErrorMessage = "Tambahin foto dong bos")]
+        [NotMapped]
+
+        public IFormFile ProfilePhoto { get; set; }
 
 
 

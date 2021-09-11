@@ -6,14 +6,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore;
+
 namespace ResumeManager03.Controllers
 {
     public class ResumeController : Controller
     {
         private readonly ResumeDbContext _context;
-        public ResumeController(ResumeDbContext context)
+        private readonly IWebHostEnvironment _webHost; // upload file
+
+        public ResumeController(ResumeDbContext context, IWebHostEnvironment webHost)
         {
             _context = context;
+            _webHost = webHost;
         }
         public IActionResult Index()
         {
@@ -33,6 +40,8 @@ namespace ResumeManager03.Controllers
         [HttpPost]
         public IActionResult Create(Applicant applicant)
         {
+            string uniqueFileName = GetUploadedFileName(applicant);
+            applicant.PhotoUrl = uniqueFileName;
             foreach (Experience experience in applicant.Experiences)
             {
                 if (experience.CompanyName == null || experience.CompanyName.Length == 0)
@@ -41,6 +50,19 @@ namespace ResumeManager03.Controllers
             _context.Add(applicant);
             _context.SaveChanges();
             return RedirectToAction("index");
+        }
+
+        private string GetUploadedFileName(Applicant applicant) {
+            string uniqueFileName = null;
+            if (applicant.ProfilePhoto != null) {
+                string uploadsFolder = Path.Combine(_webHost.WebRootPath, "images");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + applicant.ProfilePhoto.FileName;
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                using ( var fileStream = new FileStream(filePath, FileMode.Create)) {
+                    applicant.ProfilePhoto.CopyTo(fileStream);
+                }
+            }
+            return uniqueFileName;
         }
     }
 }
