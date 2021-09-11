@@ -7253,11 +7253,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\code\\personal\\ResumeManager03\\ResumeManager03.csproj",
+      "projectUniqueName": "D:\\code\\personal\\Resume-Manager\\ResumeManager03.csproj",
       "projectName": "ResumeManager03",
-      "projectPath": "D:\\code\\personal\\ResumeManager03\\ResumeManager03.csproj",
+      "projectPath": "D:\\code\\personal\\Resume-Manager\\ResumeManager03.csproj",
       "packagesPath": "C:\\Users\\Rifki Ahmad Sururi\\.nuget\\packages\\",
-      "outputPath": "D:\\code\\personal\\ResumeManager03\\obj\\",
+      "outputPath": "D:\\code\\personal\\Resume-Manager\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Rifki Ahmad Sururi\\AppData\\Roaming\\NuGet\\NuGet.Config",
