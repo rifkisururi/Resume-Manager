@@ -866,3 +866,5 @@ D:\code\personal\Resume-Manager\obj\Debug\net5.0\ResumeManager03.pdb
 D:\code\personal\Resume-Manager\obj\Debug\net5.0\ResumeManager03.genruntimeconfig.cache
 D:\code\personal\Resume-Manager\bin\Debug\net5.0\Microsoft.AspNetCore.Server.Kestrel.Https.dll
 D:\code\personal\Resume-Manager\bin\Debug\net5.0\Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.dll
+D:\code\personal\Resume-Manager\obj\Debug\net5.0\Razor\Views\Resume\Details.cshtml.g.cs
+D:\code\personal\Resume-Manager\obj\Debug\net5.0\Razor\Views\Resume\Edit.cshtml.g.cs

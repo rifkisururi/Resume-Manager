@@ -5,10 +5,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace ResumeManager03.Controllers
 {
@@ -63,6 +63,55 @@ namespace ResumeManager03.Controllers
                 }
             }
             return uniqueFileName;
+        }
+
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var data = await _context.Applicants
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (data == null)
+            {
+                return NotFound();
+            }
+
+            return View(data);
+        }
+
+        public ActionResult Edit(int id)
+        {
+            //here, get the student from the database in the real application
+
+            //getting a student from collection for demo purpose
+            var data = _context.Applicants.Where( a=> a.Id == id).FirstOrDefault();
+
+            return View(data);
+        }
+
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var data = await _context.Applicants
+                .Include(c => c.Experiences)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            _context.Remove(data);
+            _context.SaveChanges();
+
+            if (data == null)
+            {
+                return NotFound();
+            }
+
+            return RedirectToAction("index");
         }
     }
 }
